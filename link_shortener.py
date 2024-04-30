@@ -18,6 +18,11 @@ class LinkShortener:
     def shorten(self, url: str):
         url_entities = JsonManager.read()
 
+        for entity in url_entities:
+            iter_url = entity["url"]
+            if iter_url == url:
+                return entity["id"]
+
         ids = [ entity["id"] for entity in url_entities ]
         unique_ids = list(set(ids))
         unique_id = generate_id()
