@@ -13,27 +13,8 @@ def health_check(id: str):
     url = LinkShortener.get_link_by_id(id)
     return RedirectResponse(url)
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-# urls = [
-#     "https://walla.co.il",
-#     "https://nana.co.il",
-#     "https://ynet.co.il"
-# ]
-
-# for url in urls:
-#     id = LinkShortener.shorten(url)
-#     print(id)
+@app.post("/shorten")
+def create_url(params: dict):
+    url = params["url"]
+    id = LinkShortener.shorten(url)
+    return {"id": id}
