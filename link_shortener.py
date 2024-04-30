@@ -1,4 +1,7 @@
 import uuid 
+from utils.generate_id import generate_id
+from utils.is_unique import is_unique
+
 from json_manager import JsonManager
 
 class LinkShortener:
@@ -17,10 +20,10 @@ class LinkShortener:
 
         ids = [ entity["id"] for entity in url_entities ]
         unique_ids = list(set(ids))
-        unique_id = str(uuid.uuid4())[:8]
+        unique_id = generate_id()
         
-        while unique_id in unique_ids:
-            unique_id = str(uuid.uuid4())[:8]
+        while not is_unique(unique_id, unique_ids):
+            unique_id = generate_id()
 
         new_url_entity = {"id": unique_id, "url": url}
         url_entities.append(new_url_entity)
