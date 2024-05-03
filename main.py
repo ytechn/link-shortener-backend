@@ -4,16 +4,16 @@ from fastapi.responses import RedirectResponse
 
 app = FastAPI()
 
-@app.get("/health_check")
+@app.get("/api/health_check")
 def health_check():
     return "healthy"
 
-@app.get("/{id}")
+@app.get("/api/{id}")
 def health_check(id: str):
     url = LinkShortener.get_link_by_id(id)
     return RedirectResponse(url)
 
-@app.post("/shorten")
+@app.post("/api/shorten")
 def create_url(params: dict):
     url = params["url"]
     id = LinkShortener.shorten(url)
