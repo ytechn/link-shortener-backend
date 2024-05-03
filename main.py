@@ -1,11 +1,12 @@
 from link_shortener import LinkShortener
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
 from fastapi.responses import RedirectResponse
+
 
 app = FastAPI()
 
 @app.get("/api/health_check")
-def health_check():
+def health_check(r: Request):
     return "healthy"
 
 @app.get("/api/{id}")
