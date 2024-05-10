@@ -1,5 +1,5 @@
-docker run -p 8000:8080 link-shortener-devops &
-docker run -p 8001:8080 link-shortener-devops &
-docker run -p 8002:8080 link-shortener-devops &
+docker run -p 7000:8080 -v ./data/:/app/data/ link-shortener-devops &
+docker run -p 7001:8080 -v ./data/:/app/data/ link-shortener-devops &
+docker run -p 7002:8080 -v ./data/:/app/data/ link-shortener-devops &
 
 wait
