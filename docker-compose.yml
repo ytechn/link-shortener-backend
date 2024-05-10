@@ -1,0 +1,10 @@
+version: '3.8'
+
+services:
+  api-node-1:
+    image: link-shortener-devops
+    volumes:
+      - ./data/:/app/data/
+    ports:
+      - "7001:8080"
+
