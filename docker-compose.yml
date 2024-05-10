@@ -7,4 +7,5 @@ services:
       - ./data/:/app/data/
     ports:
       - "7001:8080"
-
+    environment:
+      - LINKS_PATH=./data/links.json
