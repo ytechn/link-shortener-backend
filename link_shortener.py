@@ -6,6 +6,10 @@ from json_manager import JsonManager
 
 class LinkShortener:
     @classmethod
+    def get_all_links(self):
+        return JsonManager.read()
+
+    @classmethod
     def get_link_by_id(self,  id: str):
         url_entities = JsonManager.read()
         for url_entity in url_entities:
