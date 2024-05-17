@@ -28,13 +28,9 @@ x-common-api-settings: &common-settings
 services:
   api-node-1:
     <<: *common-settings
-    ports:
-      - "7001:8080"
 
   api-node-2:
     <<: *common-settings
-    ports:
-      - "7002:8080"
 
   nginx:
     image: nginx:latest
