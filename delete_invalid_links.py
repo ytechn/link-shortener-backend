@@ -1,12 +1,9 @@
-# put logic here
 import requests
 from link_shortener import LinkShortener
 from json_manager import JsonManager
 
 url_entities = LinkShortener.get_all_links()
 new_url_entities = []
-
-print("stop here")
 
 def is_valid_link(link: str) -> bool:
     try:
