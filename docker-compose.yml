@@ -9,11 +9,13 @@ x-common-api-settings: &common-settings
     - ./data/:/app/data/
   environment:
     - LINKS_PATH=./data/links.json
-  healthcheck:
-      test: ["CMD", "curl", "localhost:8080/api/health_check"]
-      interval: 30s
-      timeout: 3s
-      retries: 10 
+  # healthcheck:
+  #     test: ["CMD", "curl", "localhost:8080/api/health_check"]
+  #     interval: 30s
+  #     timeout: 3s
+  #     retries: 10
+  networks:
+    - app-network
   deploy:
     resources:
       limits:
@@ -34,6 +36,17 @@ services:
     ports:
       - "7002:8080"
 
+  nginx:
+    image: nginx:latest
+    container_name: nginx
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+    ports:
+      - "80:80"
+    depends_on:
+      - api-node-1
+      - api-node-2
+
   delete_invalid_links:
     build: 
       context: .
@@ -44,15 +57,7 @@ services:
       - LINKS_PATH=./data/links.json
     command: ["python", "delete_invalid_links.py"]
 
-  echo-node:
-    build: 
-      context: .
-      dockerfile: Dockerfile
-    depends_on:
-      - api-node-1
-      - api-node-2
-    volumes:
-      - ./data/:/app/data/
-    environment:
-      - LINKS_PATH=./data/links.json
-    command: ["echo", "API container is up!"]
+  
+networks:
+  app-network:
+    driver: bridge
