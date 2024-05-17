@@ -14,7 +14,14 @@ x-common-api-settings: &common-settings
       interval: 30s
       timeout: 3s
       retries: 10 
-
+  deploy:
+    resources:
+      limits:
+        cpus: '1'
+        memory: 100m
+      reservations: 
+        cpus: '0.5'
+        memory: 10m
 
 services:
   api-node-1:
