@@ -46,7 +46,8 @@ services:
     depends_on:
       - api-node-1
       - api-node-2
-
+    networks:
+      - app-network
   delete_invalid_links:
     build: 
       context: .
