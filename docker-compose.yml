@@ -1,23 +1,29 @@
 version: '3.8'
 
+x-common-api-settings: &common-settings
+  image: link-shortener-devops
+  volumes:
+    - ./data/:/app/data/
+  environment:
+    - LINKS_PATH=./data/links.json  
+
 services:
   api-node-1:
-    image: link-shortener-devops
-    volumes:
-      - ./data/:/app/data/
+    <<: *common-settings
     ports:
       - "7001:8080"
-    environment:
-      - LINKS_PATH=./data/links.json
-    
+
+  api-node-2:
+    <<: *common-settings
+    ports:
+      - "7002:8080"
+
   echo-node:
     image: link-shortener-devops
     depends_on:
       - api-node-1
     volumes:
       - ./data/:/app/data/
-    ports:
-      - "7002:8080"
     environment:
       - LINKS_PATH=./data/links.json
     command: ["echo", "API container is up!"]
