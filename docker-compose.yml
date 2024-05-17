@@ -5,7 +5,12 @@ x-common-api-settings: &common-settings
   volumes:
     - ./data/:/app/data/
   environment:
-    - LINKS_PATH=./data/links.json  
+    - LINKS_PATH=./data/links.json
+  healthcheck:
+      test: ["CMD", "curl", "localhost:8080/api/health_check"]
+      interval: 30s
+      timeout: 3s
+      retries: 10 
 
 services:
   api-node-1:
