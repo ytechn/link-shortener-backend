@@ -1,4 +1,5 @@
-PUT ecommerce_data_v2 {
+PUT ecommerce_data_v2 
+{
   "mappings": {
     "properties": {
       "Country": {
