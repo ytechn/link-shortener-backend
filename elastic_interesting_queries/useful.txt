@@ -1,0 +1,253 @@
+# Get health information about the cluster
+GET _cluster/health
+
+# Get statstics about the cluster / nodes such as caching and mem / performance
+GET _nodes/stats
+
+# Get cluster's indexes
+GET _cat/indices
+
+# Create an index
+PUT cars
+
+
+POST cars/_doc
+{
+  "model": "Maybach",
+  "brand": "Mercedes"
+}
+
+GET cars/_search
+{
+  "query": {
+    "match_all": {}
+  }
+}
+
+POST cars/_update/YMe8qY8B60J6B6XzneLw
+{
+  "doc": {
+    "model": "Hybrid"
+  }  
+}
+
+DELETE cars/_doc/YMe8qY8B60J6B6XzneLw
+
+# Bulk upload 
+POST _bulk
+{ "index": {"_index": "cars", "_id": "1" } }
+{ "model": "Tesla" }
+{ "index": {"_index": "cars", "_id": "2" } }
+{ "model": "Bla" }
+
+
+
+
+
+GET _cat/indices
+
+GET news_headlines/_search
+
+GET /_cat/indices
+
+
+GET news_headlines/_search
+
+
+GET news_headlines/_search
+{
+  "track_total_hits": true 
+}
+
+GET news_hekibanaadlines/_search
+{
+  "query": {
+    "range": {
+      "date": {
+        "gte": "2015-06-01",
+        "lte": "2015-06-30"
+      }
+    }
+  } 
+}
+
+
+GET news_headlines/_search
+{
+  "query": {
+    "range": {
+      "date": {
+        "gte": "2015-06-01",
+        "lte": "2015-06-30"
+      }
+    }
+  },
+  "aggs": {
+    "by_category": {
+      "terms": {
+        "field": "category.keyword",
+        "size": 100
+      }
+    }
+  }
+}
+
+
+GET news_headlines/_search
+{
+  "query": {
+    "match": {
+      "category": "POLITICS"
+    } 
+  }, 
+  "aggs": {
+    "popuplar_in_sports": {
+      "significant_text": {
+        "field": "headline"
+      }
+    }
+  }
+}
+
+
+GET news_headlines/_search 
+{
+  "query": {
+    "match": {
+      "headline": {
+        "query": "Ed Sheeran Rocks",
+        "operator": "and"
+      }
+    }
+  }
+}
+
+GET news_headlines/_search 
+{
+  "query": {
+    "match_phrase": {
+      "headline": "Ed Sheeran"
+    }
+  }
+}
+
+
+GET news_headlines/_search 
+{
+  "query": {
+    "match": {
+      "headline": {
+        "query": "Ed Sheeran Rocks",
+        "minimum_should_match": 2
+      }
+    }
+  }
+}
+
+GET news_headlines/_search 
+{
+  "query": {
+    "multi_match": {
+      "query": "Ed Sheeran",
+      "fields": [
+        "headline",
+        "authors",
+        "short_description"
+      ]
+    }
+  }
+}
+
+
+GET news_headlines/_search 
+{
+  "query": {
+    "multi_match": {
+      "query": "Ed Sheeran",
+      "fields": [
+        "headline^2",
+        "authors",
+        "short_description"
+      ]
+    }
+  }
+}
+
+
+GET news_headlines/_search 
+{
+  "query": {
+    "multi_match": {
+      "query": "Ed Sheeran",
+      "fields": [
+        "headline^2",
+        "authors",
+        "short_description"
+      ],
+      "type": "phrase"
+    }
+  }
+}
+
+
+GET news_headlines/_search 
+{
+  "query": {
+    "bool": {
+      "must": [
+        {
+          "match_phrase": {
+            "headline": "Michael Jordan"
+          }
+        }
+      ],
+      "must_not": [
+        {
+          "match": {
+            "short_description": "Shoes"
+          }
+        }
+      ],
+      "should": [
+        {
+          "match": {
+            "category": "WEDDINGS"
+          }
+        }
+      ],
+      "filter": [
+        {
+          "range": {
+            "date": {
+              "gte": "2013-05-10",
+              "lte": "2016-07-25"
+            }
+          }
+        }
+      ]
+      
+    }
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
