@@ -5,7 +5,7 @@ import json
 es = Elasticsearch(['http://localhost:9200'])
 
 # Load your JSON data
-with open('./datasets/ecommerce.json', 'r') as f:
+with open('./datasets/ecommerce_data.json', 'r') as f:
     json_data = json.load(f)
 
 # Create the bulk data format

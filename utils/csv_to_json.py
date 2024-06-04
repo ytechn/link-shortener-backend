@@ -20,8 +20,8 @@ if __name__ == "__main__":
     ]
 
     csv_to_json(
-        "./datasets/ecommerce.csv", 
-        "./datasets/ecommerce.json", 
+        "./datasets/ecommerce_data.csv", 
+        "./datasets/ecommerce_data.json", 
         fields
     )
 

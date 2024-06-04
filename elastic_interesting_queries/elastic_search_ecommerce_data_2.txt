@@ -1,0 +1,31 @@
+PUT ecommerce_data_v2 {
+  "mappings": {
+    "properties": {
+      "Country": {
+        "type": "keyword"
+      },
+      "CustomerID": {
+        "type": "long"
+      },
+      "Description": {
+        "type": "text"
+      },
+      "InvoiceDate": {
+        "type": "date",
+        "format": "M/d/yyyy H:m"
+      },
+      "InvoiceNo": {
+        "type": "keyword"
+      },
+      "Quantity": {
+        "type": "long"
+      },
+      "StockCode": {
+        "type": "keyword"
+      },
+      "UnitPrice": {
+        "type": "double"
+      }
+    }
+  }
+}
