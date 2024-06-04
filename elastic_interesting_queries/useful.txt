@@ -232,6 +232,44 @@ GET news_headlines/_search
 
 
 
+# Aggregation with multiple filters: 
+GET ecommerce_data_v2/_search 
+{
+  "size": 0,
+  "query": {
+    "bool": {
+      "filter": [
+        {
+          "range": {
+            "UnitPrice": {
+              "gte": 1,
+              "lte": 100
+            }
+          }
+        },
+        {
+          "range": {
+            "InvoiceDate": {
+              "gte": "1/1/2011 00:00",
+              "lte": "1/30/2011 00:00"
+            }
+          }
+        }
+        
+      ]
+    }
+  },
+  "aggs": {
+    "stats_unit_price": {
+      "stats": {
+        "field": "UnitPrice"
+      }
+    }
+  }
+}
+
+
+
 
 
 
