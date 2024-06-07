@@ -1,9 +1,10 @@
 import json 
 from elasticsearch import Elasticsearch, helpers
 from typing import Dict, List
+import os 
 
 LINKS_INDEX = "links"
-es_client = Elasticsearch(["http://localhost:9200"])
+es_client = Elasticsearch([os.environ["ELASTICSEARCH_URL"]])
 
 def insert_link(url: str) -> str:
     response = es_client.index(

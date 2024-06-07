@@ -1,4 +1,5 @@
 import uuid 
+from elastic_manager import get_url_by_id
 from utils.generate_id import generate_id
 from utils.is_unique import is_unique
 
@@ -11,12 +12,11 @@ class LinkShortener:
 
     @classmethod
     def get_link_by_id(self,  id: str):
-        url_entities = JsonManager.read()
-        for url_entity in url_entities:
-            if url_entity["id"] == id:
-                return url_entity["url"]
+        try: 
+            return get_url_by_id(id)
+        except Exception as e:
+            raise e
         
-        raise Exception("Your ID is not found")
 
     @classmethod
     def shorten(self, url: str):

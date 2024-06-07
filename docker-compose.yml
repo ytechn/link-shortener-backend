@@ -1,7 +1,6 @@
 version: '3.8'
 
 x-common-api-settings: &common-settings
-  # image: link-shortener-devops
   build: 
     context: .
     dockerfile: Dockerfile
@@ -9,8 +8,9 @@ x-common-api-settings: &common-settings
     - ./data/:/app/data/
   environment:
     - LINKS_PATH=./data/links.json
+    - ELASTICSEARCH_URL=http://elasticsearch:9200
   networks:
-    - app-network
+    - elk
   deploy:
     resources:
       limits:
@@ -21,8 +21,10 @@ x-common-api-settings: &common-settings
         memory: 10m
 
 services:
-  # api-node-1:
-  #   <<: *common-settings
+  api-node-1:
+    <<: *common-settings
+    ports:
+      - "8080:8080"
 
   # nginx:
   #   image: nginx:latest
@@ -33,8 +35,7 @@ services:
   #     - "80:80"
   #   depends_on:
   #     - api-node-1
-  #   networks:
-  #     - app-network
+
 
   # delete_invalid_links:
   #   build: 
@@ -75,7 +76,6 @@ services:
       - elk
   
 networks:
-  app-network:
-    driver: bridge
+
   elk:
     driver: bridge
