@@ -7,7 +7,7 @@ new_url_entities = []
 
 def is_valid_link(link: str) -> bool:
     try:
-        response = requests.get(link, )
+        response = requests.get(link)
         status_code = response.status_code
         if status_code in [200, 201]:
             return True
