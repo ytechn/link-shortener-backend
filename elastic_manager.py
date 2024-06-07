@@ -15,7 +15,11 @@ def insert_link(url: str) -> str:
     return response.body["_id"]
 
 def get_all_links() -> List:
-    response = es_client.search(index=LINKS_INDEX)
+    response = es_client.search(
+        index=LINKS_INDEX, 
+        size=100
+    )
+
     raw_results = response.body["hits"]["hits"]
 
     return [

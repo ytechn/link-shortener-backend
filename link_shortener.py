@@ -1,5 +1,5 @@
 import uuid 
-from elastic_manager import get_url_by_id
+from elastic_manager import get_all_links, get_url_by_id
 from utils.generate_id import generate_id
 from utils.is_unique import is_unique
 
@@ -7,8 +7,8 @@ from json_manager import JsonManager
 
 class LinkShortener:
     @classmethod
-    def get_all_links(self):
-        return JsonManager.read()
+    def get_all(self):
+        return get_all_links()
 
     @classmethod
     def get_link_by_id(self,  id: str):

@@ -6,6 +6,7 @@ x-common-api-settings: &common-settings
     dockerfile: Dockerfile
   volumes:
     - ./data/:/app/data/
+    - ./:/app/
   environment:
     - LINKS_PATH=./data/links.json
     - ELASTICSEARCH_URL=http://elasticsearch:9200
