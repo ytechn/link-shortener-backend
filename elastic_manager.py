@@ -1,5 +1,4 @@
-import json 
-from elasticsearch import Elasticsearch, helpers
+from elasticsearch import Elasticsearch
 from typing import Dict, List
 import os 
 
