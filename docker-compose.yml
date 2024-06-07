@@ -63,6 +63,19 @@ services:
     networks:
       - elk
 
+  logstash:
+    image: logstash:7.16.2
+    container_name: logstash
+    volumes:
+      - ./logstash.conf:/usr/share/logstash/pipeline/logstash.conf # a mapping to the logstash configuration
+    restart: always
+    ports:
+      - "4001:4001"
+    depends_on:
+      - elastic
+    networks:
+      - elk
+    
   kibana:
     image: kibana:7.16.2
     container_name: kibana
