@@ -10,8 +10,12 @@ x-common-api-settings: &common-settings
   environment:
     - LINKS_PATH=./data/links.json
     - ELASTICSEARCH_URL=http://elasticsearch:9200
+    - LOGSTASH_HOST=logstash
+    - LOGSTASH_PORT=5000
   networks:
     - elk
+  depends_on:
+    - elastic
   deploy:
     resources:
       limits:
@@ -70,9 +74,10 @@ services:
       - ./logstash.conf:/usr/share/logstash/pipeline/logstash.conf # a mapping to the logstash configuration
     restart: always
     ports:
-      - "4001:4001"
+      - "5000:5000"
     depends_on:
       - elastic
+      - api-node-1
     networks:
       - elk
     
