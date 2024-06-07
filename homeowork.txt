@@ -1,0 +1,17 @@
+TODO APP:
+
+Write a todo list app that supports
+1. Add note 
+2. Read note
+3. Edit note
+4. Delete note
+
+using Elasticsearch
+Wrap it with Nginx 
+Dockercompose that runs all of the services
+
+You should be able to run 2+ api instances but should be accessible only from nginx
+
+
+
+
